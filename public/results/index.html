@@ -1,0 +1,62 @@
+<html>
+<head>
+<title>
+Five Words Results
+</title>
+<script type="text/javascript" src="wordcloud2.js"></script>
+<script type="text/javascript">
+makeRequest();
+window.setInterval(function() {
+  makeRequest();
+ }, 1000);
+
+function compare(a, b) {
+  if(Object.keys(b).length < 1) {
+    return false;
+  }
+  var keys = Object.keys(a);
+  if(keys.length < 1) {
+    return false;
+  }
+  for(i = 0; i < keys.length; i++) {
+    if(a[keys[i]] !== b[keys[i]]) {
+      return false;
+    }
+  }
+  return true;
+}
+var old = {};
+function makeRequest() {
+  var request = new XMLHttpRequest();
+  request.open('GET', '/data');
+  request.onreadystatechange = function() {
+    if(request.status == 200 && request.responseText !== "") {
+      var obj = JSON.parse(request.responseText);
+      if(!compare(obj, old)) {
+        old = obj;
+        updateCloud(obj);
+      }
+    }
+  };
+  request.send(); 
+}
+function updateCloud(data) {
+  var formatted = [];
+  Object.keys(data).forEach(function(key) {
+      var result = [] 
+      formatted.push([key, data[key]]);
+    });
+  WordCloud(document.getElementById('cloud'), {list: formatted,   weightFactor: function (size) {
+          return Math.log(size + 1) * 100;
+            }, rotateRatio: .5
+              //gridSize: Math.round(16 * document.getElementById('cloud').width / 1024)
+            
+            });
+}
+</script>
+</head>
+<body>
+<canvas width="1024" height="768" id="cloud"/> 
+
+</body>
+</html>

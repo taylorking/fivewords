@@ -7,26 +7,30 @@ var up = bodyparser.urlencoded({extended: false});
 var words = {};
 
 
-app.get('/', express.static('./public/submit'));
-app.get('/results', express.static('./public/results'));
+app.use('/', express.static('./public/submit'));
+app.use('/results', express.static('./public/results'));
+
+app.get('/data', function(req,res) {
+  res.send(JSON.stringify(words));
+});
 app.get('/words', function(req, res) {
   return words;
 });
 
-app.post('/reset', up, function(req, res) {
-  if(req.body.password == 'password') {
-    words = {};
-  }
+app.get('/reset',  function(req, res) {
+  words = {};
+  res.sendStatus(200);
 });
 app.post('/submit', jp, function(req, res) {
   console.log(req.body);
-  req.body.foreach(function(word) { 
+  req.body.forEach(function(word) { 
     if(word in words) {
       words[word]++;
     } else {
       words[word] = 1;
     }
   });
+   res.sendStatus(200);
 });
 
 app.listen(3000);

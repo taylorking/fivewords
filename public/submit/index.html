@@ -9,20 +9,6 @@ Submit 5 words
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 
-<!-- Latest compiled and minified JavaScript -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body>
-<h1> Submit 5 words</h1><br/>
-<p>
-<input class="form-control input-lg" id="word1"/> <br/><br/>
-<input class="form-control input-lg" id="word2"/> <br/><br/>
-<input class="form-control input-lg" id="word3"/> <br/><br/>
-<input class="form-control input-lg" id="word4"/> <br/><br/>
-<input class="form-control input-lg" id="word5"/> <br/><br/>
-<button type="button" class="btn btn-lg btn-default onclick=submit()">
-Submit 
-</button>
 <script type="text/javascript">
 
 function submit() {
@@ -43,6 +29,21 @@ function submit() {
 }
 </script>
 
+<!-- Latest compiled and minified JavaScript -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<h1> Submit 5 words</h1><br/>
+<p>
+Word 1:
+<input class="form-control input-lg" id="word1"/> <br/>Word 2:<br/>
+<input class="form-control input-lg" id="word2"/> <br/>Word 3:<br/>
+<input class="form-control input-lg" id="word3"/> <br/>Word 4:<br/>
+<input class="form-control input-lg" id="word4"/> <br/>Word 5:<br/>
+<input class="form-control input-lg" id="word5"/> <br/><br/>
+<button type="button" class="btn btn-lg btn-default" onclick=submit()>
+Submit 
+</button>
 </p>
 </body>
 </html>

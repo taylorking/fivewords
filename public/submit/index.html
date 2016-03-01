@@ -1,0 +1,48 @@
+<html>
+<head>
+<title>
+Submit 5 words
+</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<h1> Submit 5 words</h1><br/>
+<p>
+<input class="form-control input-lg" id="word1"/> <br/><br/>
+<input class="form-control input-lg" id="word2"/> <br/><br/>
+<input class="form-control input-lg" id="word3"/> <br/><br/>
+<input class="form-control input-lg" id="word4"/> <br/><br/>
+<input class="form-control input-lg" id="word5"/> <br/><br/>
+<button type="button" class="btn btn-lg btn-default onclick=submit()">
+Submit 
+</button>
+<script type="text/javascript">
+
+function submit() {
+  var words=[];
+  words.push(document.getElementById("word1").value);
+  words.push(document.getElementById("word2").value);
+  words.push(document.getElementById("word3").value);
+  words.push(document.getElementById("word4").value);
+  words.push(document.getElementById("word5").value);
+  var request = new XMLHttpRequest();
+  request.open("POST", "/submit");
+  request.setRequestHeader("Content-Type", "application/json");
+
+  request.onreadystatechange = function() {
+    document.location = "/results";
+  };
+  request.send(JSON.stringify(words));
+}
+</script>
+
+</p>
+</body>
+</html>

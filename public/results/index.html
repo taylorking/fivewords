@@ -32,9 +32,11 @@ function makeRequest() {
   request.onreadystatechange = function() {
     if(request.status == 200 && request.responseText !== "") {
       var obj = JSON.parse(request.responseText);
-      if(!compare(obj, old)) {
-        old = obj;
-        updateCloud(obj);
+      var results = obj.results; 
+     if(!compare(results, old)) {
+        updateCount(obj.count);
+	old = results;
+        updateCloud(results);
       }
     }
   };
@@ -47,16 +49,20 @@ function updateCloud(data) {
       formatted.push([key.charAt(0).toUpperCase() + key.slice(1), data[key]]);
     });
   WordCloud(document.getElementById('cloud'), {list: formatted,   weightFactor: function (size) {
-          return Math.log(size + 1) * 50;
+          return Math.log(size + 1) * 60;
             }, rotateRatio: .5
               //gridSize: Math.round(16 * document.getElementById('cloud').width / 1024)
             
             });
 }
+function updateCount(num) {
+	document.getElementById("count").innerHTML = num + " submitted";
+}
 </script>
 </head>
 <body>
 <canvas width="1024" height="768" id="cloud"></canvas> 
+<h5 id="count"/>
 <h6>Taylor King 2016</h6>
 </body>
 </html>

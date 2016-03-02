@@ -3,6 +3,7 @@ var app = express();
 var bodyparser = require('body-parser');
 var jp = bodyparser.json();
 var up = bodyparser.urlencoded({extended: false});
+var auth = require('http-auth');
 
 var words = {};
 var submitted = 0;
@@ -17,7 +18,16 @@ app.get('/words', function(req, res) {
   return {result: words, count: submitted};
 });
 
-app.get('/reset',  function(req, res) {
+var basic = auth.basic({
+        realm: "Web."
+    }, function (username, password, callback) { // Custom authentication method.
+        callback(username === "wilkes" && password === process.env.PW);
+    }
+);
+
+
+
+app.get('/reset',  auth.connect(basic), function(req, res) {
   words = {};
   submitted = 0;
   res.sendStatus(200);

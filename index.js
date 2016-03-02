@@ -24,6 +24,7 @@ app.get('/reset',  function(req, res) {
 app.post('/submit', jp, function(req, res) {
   console.log(req.body);
   req.body.forEach(function(word) { 
+    word = word.toLowerCase();
     if(word in words) {
       words[word]++;
     } else {

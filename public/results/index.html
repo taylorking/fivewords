@@ -44,10 +44,10 @@ function updateCloud(data) {
   var formatted = [];
   Object.keys(data).forEach(function(key) {
       var result = [] 
-      formatted.push([key, data[key]]);
+      formatted.push([key.charAt(0).toUpperCase() + key.slice(1), data[key]]);
     });
   WordCloud(document.getElementById('cloud'), {list: formatted,   weightFactor: function (size) {
-          return Math.log(size + 1) * 100;
+          return Math.log(size + 1) * 50;
             }, rotateRatio: .5
               //gridSize: Math.round(16 * document.getElementById('cloud').width / 1024)
             

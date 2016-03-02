@@ -10,9 +10,14 @@ Submit 5 words
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 
 <script type="text/javascript">
-
+var clicked = false;
 function submit() {
-  var words=[];
+	if(clicked) {
+		return;
+	}
+	clicked = true;
+
+	var words=[];
   words.push(document.getElementById("word1").value);
   words.push(document.getElementById("word2").value);
   words.push(document.getElementById("word3").value);
@@ -40,8 +45,8 @@ Word 1:
 <input class="form-control input-lg" id="word2"/> <br/>Word 3:<br/>
 <input class="form-control input-lg" id="word3"/> <br/>Word 4:<br/>
 <input class="form-control input-lg" id="word4"/> <br/>Word 5:<br/>
-<input class="form-control input-lg" id="word5"/> <br/><br/>
-<button type="button" class="btn btn-lg btn-default" onclick=submit()>
+<input class="form-control input-lg" id="word5"/> <br/>
+<button type="button" class="btn btn-success" style="display: block; width: 100%; height: 70;" onclick=submit()>
 Submit 
 </button>
 </p>
